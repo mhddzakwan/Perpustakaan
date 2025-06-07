@@ -1,5 +1,5 @@
 # 1. Inheritance:
-pada Person-Admin-Member. Person sebagai class induk sementara admin dan member sebagai class turunannya
+pada package model terdapat Person-Admin-Member. Person sebagai class induk sementara admin dan member sebagai class turunannya
 
 # 2. Encapsulation 
 Terdapat disemua file di folder Model (getter-setter dan atribut private)
