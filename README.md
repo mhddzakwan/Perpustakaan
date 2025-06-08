@@ -1,10 +1,11 @@
 # 1. Inheritance:
-pada package model terdapat Person-Admin-Member. Person sebagai class induk sementara admin dan member sebagai class turunannya
+pada folder model terdapat file java Person-Admin-Member. Person.java sebagai class induk sementara admin.java dan member.java sebagai class turunannya
 
 # 2. Encapsulation 
 Terdapat disemua file di folder Model (getter-setter dan atribut private)
 # 3. Polymorphism
-- Di package Model- Member.java, contstructor nya ad 2, itu overriding polymorpihsm
+- Di folder Model- lalu file Member.java, terdapat contstructor nya ad 2, itu overriding polymorpihsm
+- jadi constructor Member itu namanya sama, tapi parameternya beda, sehingga bisa outputnya beda, disesuaikan sama nama parameternya
 
 # 4. Adapter
 Digunakan untuk printer, di package adapter, dan model printer.java
