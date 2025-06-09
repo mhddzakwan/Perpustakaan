@@ -1,5 +1,6 @@
 # 1. Inheritance:
 pada folder model terdapat file java Person-Admin-Member. Person.java sebagai class induk sementara admin.java dan member.java sebagai class turunannya. 
+
 Alasan: Karena pada admin dan member memiliki atribut yang sama yaitu atribut nama, email dan nomor hp, sehingga sebaiknya dibuat 1 class induk yg merepresentasikan keduanya yaitu class induk Person yg memiliki atribut nama, email dan nomor hp. anak class admin dan member hanya perlu mengextends person sehingga kedua turunan class tsb memiliki atribut yg sama denan person.
 
 # 2. Encapsulation 
@@ -15,7 +16,36 @@ Contoh menyembunyikan di Book.java:
     private String photo;
     private CheckBox select;
 ```
+karena private, sehingga tersembunyi dan hanya dapat diakses melalui getter, contohnya:
+```
+public String getId() {
+        return id;
+    }
 
+    public String getTitle() {
+        return title;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public String getReleased() {
+        return released;
+    }
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public CheckBox getSelect() {
+        return select;
+    }
+```
 
 # 3. Polymorphism
 - Di folder Model- lalu file Member.java, terdapat contstructor nya ad 2, itu overriding polymorpihsm
