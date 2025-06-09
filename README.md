@@ -72,15 +72,45 @@ public String getId() {
 - Sementara yg kedua, digunakan pada Saat peminjaman buku, ketika admin menginput id member, maka sistem akan mencari data berdasarkan id nya, sehingga parameter constructornya tidak perlu ID
 
 # 4. Adapter
-Digunakan untuk printer, di package adapter, dan model printer.java
--	Abstraksi Akses Hardware
-Adapter menyembunyikan kompleksitas teknis komunikasi langsung dengan printer (misalnya via Bluetooth, USB, atau serial port). Kamu cukup memanggil metode seperti printBarcode(String id) tanpa perlu tahu bagaimana karakter dikirim ke printer.
--	 Dukungan Beragam Tipe Printer
-Dengan adapter, kamu bisa mengganti merek atau model printer (misalnya dari Epson ke RPP02) tanpa mengubah kode utama. Cukup ubah isi adapter sesuai driver atau protokol baru.
+- Masalah yg akan diselesaikan: Permasalahan terkait mencetak bukti peminjaman dan barcode buku.
+- Adapter = Class Gabungan antara interface dan class
+- Interfacenya terdapat pada folder Model, file Printer
+- Classnya terdapat pada folder adapter, pada file ThermalPrinterAdapter.
+
+- Cara kerja:
+1. Pertama, Interface Printer, akan diisi dengan fungsi-fungsi yang dapat dijalankan oleh printer
+  ```
+  public interface Printer {
+    void printText(String idPeminjaman, String nama, String nim, String tanggalPinjam, String tenggat, java.util.List<?> books) throws Exception;
+    void printBarcode(String id) throws Exception;
+}
+
+  ```
+2. Kedua, Buat class yg mengimplementasikan interface tsb, sehingga classnya wajib membuat nama fungsi yang ada pada interface:
+```
+public void printText(String idPeminjaman, String nama, String nim, String tanggalPinjam, String tenggat, List<?> books) throws Exception {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append((char) 27).append((char) 97).append((char) 1); // Center
+        sb.append("PERPUSTAKAAN\n========================\n\n");
+        sb.append((char) 27).append((char) 97).append((char) 0); // Left
+        //dan seterunya...
+}
+@Override
+    public void printBarcode(String id) throws Exception {
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        outputStream.write(new byte[]{0x1B, 0x61, 0x01});
+ //dan seterunya...
+}
+```
 
 # 5. Composite
-Penerapan composite ada di setial file .fxml. setiap komponen grafis terdiri dari hierarkis. Misalnya pada sidebar di tiap file .fxml, tersusun atas elemen paling dasar yaitu, anchor pane, lalu ada vbox dan di dalamnya terdapat button. 
+- Penerapan composite ada di setial file .fxml.
+- Misalnya pada file dashboard.fxml
+- setiap komponen grafis terdiri dari hierarkis. Misalnya pada sidebar tersusun atas elemen paling dasar yaitu, anchor pane, lalu ada vbox dan di dalamnya terdapat button. 
 Jadi cara membuktikannya, kalau vbox di hapus, maka semua tombol di dalam vbox akan hilang.
+- Gambar struktur hierarkisnya:
+
 
 # 6. Decorator
 Ada pada reserveController
