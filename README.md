@@ -110,7 +110,7 @@ public void printText(String idPeminjaman, String nama, String nim, String tangg
 - setiap komponen grafis terdiri dari hierarkis. Misalnya pada sidebar tersusun atas elemen paling dasar yaitu, anchor pane, lalu ada vbox dan di dalamnya terdapat button. 
 Jadi cara membuktikannya, kalau vbox di hapus, maka semua tombol di dalam vbox akan hilang.
 - Gambar struktur hierarkisnya:
-![Preview](Screenshot (1943).png)
+![Preview](Screenshot.png)
 
 Screenshot (1943).png
 # 6. Decorator
