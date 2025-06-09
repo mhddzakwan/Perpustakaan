@@ -113,7 +113,95 @@ Jadi cara membuktikannya, kalau vbox di hapus, maka semua tombol di dalam vbox a
 ![Preview](Screenshot.png)
 
 # 6. Decorator
-Ada pada reserveController
+Decorator digunakan untuk menambahkan fitur tambahan ke suatu objek tanpa mengubah strukturnya. Dalam contoh ini, kita ingin menambahkan fitur seperti:
+- Menambahkan label pada informasi buku.
+- Menambahkan logging ketika informasi ditampilkan.
+Langkah2:
+1. Buat Interface BookDisplay.java
+```
+public interface BookDisplay {
+    String display();
+}
+```
+Semua class yang ingin “menampilkan” info buku harus implementasi interface ini.
+
+2. Implementasi Dasar — BasicBookDisplay.java
+Kelas ini akan mengimplementasi interface BookDisplay.
+```
+public class BasicBookDisplay implements BookDisplay {
+    private Book book;
+
+    public BasicBookDisplay(Book book) {
+        this.book = book;
+    }
+
+    @Override
+    public String display() {
+        return "Judul: " + book.getTitle() + ", Pengarang: " + book.getAuthor();
+    }
+}
+```
+Menampilkan informasi standar buku (judul & pengarang).
+
+3. Tambahkan Decorator — LabelledBookDecorator.java
+Kita ingin menambahkan label (seperti “Book Information: ...”) tanpa mengubah BasicBookDisplay.
+```
+public class LabelledBookDecorator implements BookDisplay {
+    protected BookDisplay bookDisplay;
+    private String label;
+
+    public LabelledBookDecorator(BookDisplay bookDisplay, String label) {
+        this.bookDisplay = bookDisplay;
+        this.label = label;
+    }
+
+    @Override
+    public String display() {
+        return label + ": " + bookDisplay.display();
+    }
+}
+```
+Menerima objek yang sudah implementasi BookDisplay, lalu menambahkan label ke hasil display().
+
+4. Tambahkan Decorator Logging — LoggingBookDecorator.java
+Tambahkan logging untuk mencatat bahwa buku sedang ditampilkan.
+```
+import java.util.logging.Logger;
+
+public class LoggingBookDecorator implements BookDisplay {
+    private BookDisplay bookDisplay;
+    private Logger logger = Logger.getLogger(this.getClass().getName());
+
+    public LoggingBookDecorator(BookDisplay bookDisplay) {
+        this.bookDisplay = bookDisplay;
+    }
+
+    @Override
+    public String display() {
+        String result = bookDisplay.display();
+        logger.info("Menampilkan info buku: " + result);
+        return result;
+    }
+}
+```
+Decorator ini tidak mengubah tampilan, hanya mencatat log.
+
+5. Kombinasikan Semua di BookController.java
+```
+public class BookController {
+    public void showBookDetails(Book book) {
+        BookDisplay basic = new BasicBookDisplay(book);  // tampilkan dasar
+        BookDisplay withLogging = new LoggingBookDecorator(basic); // tambahkan logging
+        BookDisplay withLabel = new LabelledBookDecorator(withLogging, "Info Buku"); // tambahkan label
+
+        System.out.println(withLabel.display());
+    }
+}
+```
+
+Decorator disusun bertingkat: dasar(BasicBookDisplay.java) → logging(LoggingBookDecorator.java) → label(LabelledBookDecorator.java).
+
+Kalau ingin menambahkan fitur baru, buat decorator baru dengan mengimplementasikan 
 
 # 7. Thread
 Pada reserveCOntroller.java. Jadi saat mengeprint dilakukan di latar belakang  sehingga sistem tidak perlu menunggi prose print selesai untuk melakukan aktovitas lainnya.
