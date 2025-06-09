@@ -201,8 +201,6 @@ public class BookController {
 
 Decorator disusun bertingkat: dasar(BasicBookDisplay.java) → logging(LoggingBookDecorator.java) → label(LabelledBookDecorator.java).
 
-Kalau ingin menambahkan fitur baru, buat decorator baru dengan mengimplementasikan 
-
 # 7. Thread
 Pada reserveCOntroller.java. Jadi saat mengeprint dilakukan di latar belakang  sehingga sistem tidak perlu menunggi prose print selesai untuk melakukan aktovitas lainnya.
 ```
