@@ -112,13 +112,44 @@ Jadi cara membuktikannya, kalau vbox di hapus, maka semua tombol di dalam vbox a
 - Gambar struktur hierarkisnya:
 ![Preview](Screenshot.png)
 
-Screenshot (1943).png
 # 6. Decorator
 Ada pada reserveController
 
 # 7. Thread
-Pada reserveCOntroller.java. Jadi saat mengeprint dilakukan di latar belakang  sehingga sistem tidak perlu menunggi prose print selesai untuk melakukan aktovitas lainnya
+Pada reserveCOntroller.java. Jadi saat mengeprint dilakukan di latar belakang  sehingga sistem tidak perlu menunggi prose print selesai untuk melakukan aktovitas lainnya.
+```
+Task<Void> printTask = new Task<>() {
+            //THREAD
+            @Override
+            protected Void call() {
+                try {
+
+                    // Cetak teks pinjaman
+                    Printer printer = new ThermalPrinterAdapter();
+                    printer.printText(id_peminjaman, nama, nim, tanggal_peminjaman, tenggat, BookList);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                return null;
+            }
+        };
+        new Thread(printTask).start();
+```
 
 # 8. Singleton
 Penerapannya di setiap file di folder Database, pada tiap fungsi diawali db.getConnection();
 Dan diakhir fungsi terdapat db.closeConnection(); artinya, setelah fungsi dijalankan, maka akses di database diputus agar database diakses pada saat diperlukan saja (saat fungsi dijalankan).
+Contohnya pada folder Db, file MemberDb:
+```
+    public void deleteMemberById(String id) {
+        String query = "DELETE FROM anggota WHERE nim = ?";
+        connection = db.getConnection();
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setString(1, id);
+            stmt.executeUpdate();
+            db.closeConnection();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+```
