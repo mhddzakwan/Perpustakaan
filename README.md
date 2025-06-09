@@ -48,8 +48,28 @@ public String getId() {
 ```
 
 # 3. Polymorphism
-- Di folder Model- lalu file Member.java, terdapat contstructor nya ad 2, itu overriding polymorpihsm
-- jadi constructor Member itu namanya sama, tapi parameternya beda, sehingga bisa outputnya beda, disesuaikan sama nama parameternya
+- Buka folder Model,  file Member.java
+- Polymorphism = Nama fungsi/constructorya sama, tetapi parameter dan isi nya beda.
+- Contohnya pada file Member.java tersebut pada:
+```
+    public Member(String id, String name, String email, String phone, String department, String photo) {
+        super(name, email, phone);
+        this.id = id;
+        this.department = department;
+        this.photo = photo;
+        this.select = new CheckBox();
+    }
+
+    // Untuk ngambil data dari ReserveDb
+    public Member(String name, String email, String phone, String department, String photo){
+        super(name, email, phone);
+        this.department = department;
+        this.photo = photo;
+
+    }
+```
+- Constructor Member pertama, digunakan untuk menampilkan data ke tabel, karena datanya lengkap
+- Sementara yg kedua, digunakan pada Saat peminjaman buku, ketika admin menginput id member, maka sistem akan mencari data berdasarkan id nya, sehingga parameter constructornya tidak perlu ID
 
 # 4. Adapter
 Digunakan untuk printer, di package adapter, dan model printer.java
